@@ -14,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const house = await loadGLTF('./assets/models/house/dog.gltf');
     house.scene.scale.set(3, 3, 3);
-    house.scene.position.set(1, 0, 0);
-    house.scene.rotation.set(0, 0, 0);
+    house.scene.position.set(0, 0, 0);
+    house.scene.rotation.set(90, 0, 0);
 
     const houseAncor = mindarThree.addAnchor(0);
     houseAncor.group.add(house.scene);
@@ -31,3 +31,4 @@ document.addEventListener('DOMContentLoaded', () => {
   startButton.addEventListener("click", start);
   document.body.appendChild(startButton);
 });
+
