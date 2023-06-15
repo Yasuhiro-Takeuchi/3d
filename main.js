@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const light = new THREE.HemisphereLight( 0xffffff, 0xbbbbff, 1 );
     scene.add(light);
 
-    const house = await loadGLTF('./assets/models/house/dog.gltf');
+    const house = await loadGLTF('./assets/models/house/usi.gltf');
     house.scene.scale.set(3, 3, 3);
     house.scene.position.set(0, 0, 0);
     house.scene.rotation.set(90, 0, 0);
