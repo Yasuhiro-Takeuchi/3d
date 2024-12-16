@@ -1,10 +1,13 @@
+import { loadGLTF } from "./libs/loader.js";
+const THREE = window.MINDAR.IMAGE.THREE;
+
 document.addEventListener('DOMContentLoaded', () => {
-  const start = async() => {
+  const start = async () => {
     const mindarThree = new window.MINDAR.IMAGE.MindARThree({
       container: document.body,
-      imageTargetSrc: './assets/targets/multiple_targets.mind' // 複数マーカーを含むファイル
+      imageTargetSrc: './assets/targets/sotuken_inu.mind' // 上のコードのターゲットファイルを使用
     });
-    const {renderer, scene, camera} = mindarThree;
+    const { renderer, scene, camera } = mindarThree;
 
     // 照明を追加
     const light = new THREE.HemisphereLight(0xffffff, 0xbbbbff, 1);
@@ -16,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const syachi = await loadGLTF('./assets/models/syachi.gltf');
     const nezumi = await loadGLTF('./assets/models/nezumi.gltf');
 
-    // スケールや位置を設定
+    // モデルのスケール、位置、回転を設定
     dog.scene.scale.set(2, 2, 2);
     dog.scene.position.set(0, 0, 0);
     dog.scene.rotation.set(0, 0, 0);
@@ -34,21 +37,22 @@ document.addEventListener('DOMContentLoaded', () => {
     nezumi.scene.rotation.set(0, 0, 0);
 
     // アンカーを作成
-    const dogAnchor = mindarThree.addAnchor(0); // 1つ目のターゲット
-    const zouAnchor = mindarThree.addAnchor(1); // 2つ目のターゲット
-    const syachiAnchor = mindarThree.addAnchor(2); // 3つ目のターゲット
-    const nezumiAnchor = mindarThree.addAnchor(3); // 4つ目のターゲット
+    const dogAnchor = mindarThree.addAnchor(0); // 犬用マーカー
+    const zouAnchor = mindarThree.addAnchor(1); // ゾウ用マーカー
+    const syachiAnchor = mindarThree.addAnchor(2); // シャチ用マーカー
+    const nezumiAnchor = mindarThree.addAnchor(3); // ネズミ用マーカー
 
-    // 各アンカーにモデルを追加
+    // モデルをアンカーに追加
     dogAnchor.group.add(dog.scene);
     zouAnchor.group.add(zou.scene);
     syachiAnchor.group.add(syachi.scene);
     nezumiAnchor.group.add(nezumi.scene);
-    // MindARを開始
-    await mindarThree.start();
 
-    // アニメーションループを開始
+    // アニメーションループの準備
+    const clock = new THREE.Clock();
+    await mindarThree.start();
     renderer.setAnimationLoop(() => {
+      const delta = clock.getDelta();
       renderer.render(scene, camera);
     });
   };
