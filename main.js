@@ -36,8 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // アンカーを作成
     const dogAnchor = mindarThree.addAnchor(0); // 1つ目のターゲット
     const zouAnchor = mindarThree.addAnchor(1); // 2つ目のターゲット
-    const syachiAnchor = mindarThree.addAnchor(1); // 3つ目のターゲット
-    const nezumiAnchor = mindarThree.addAnchor(1); // 4つ目のターゲット
+    const syachiAnchor = mindarThree.addAnchor(2); // 3つ目のターゲット
+    const nezumiAnchor = mindarThree.addAnchor(3); // 4つ目のターゲット
 
     // 各アンカーにモデルを追加
     dogAnchor.group.add(dog.scene);
